@@ -44,7 +44,7 @@ let Tlist_File_Fold_Auto_Close=1
 "	\ 'auto_export': 1,
 
 if MySys()=="unix"
-	colorscheme torte 
+	colorscheme desert
 	set fileencodings=utf-8,gb2312,gbk,gb18030
 	set termencoding=utf-8
 	set fileformats=unix
