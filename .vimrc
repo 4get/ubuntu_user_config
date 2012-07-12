@@ -12,7 +12,7 @@ set showcmd
 "set nu
 set tw=0
 "set incsearch	
-set fileformats=unix,dos
+"set fileformats=unix,dos
 
 map <F2> :e ++ff=dos<CR>
 map <F3> :set mouse=a<CR>
@@ -47,7 +47,6 @@ if MySys()=="unix"
 	colorscheme desert
 	set fileencodings=utf-8,gb2312,gbk,gb18030
 	set termencoding=utf-8
-	set fileformats=unix
 	set encoding=utf-8
 	
 	let g:vimwiki_list = [{'path': '/workspace/wiki/',
@@ -55,11 +54,14 @@ if MySys()=="unix"
 		\ 'template_path': '/workspace/wiki/.template/',
 		\ 'template_default': 'united',
 		\ 'index': 'index',
-		\ 'ext': '.wiki',
-		\ 'syntax': 'default',
+		\ 'ext': '.md',
+		\ 'syntax': 'markdown',
 		\ 'nested_syntaxes': {'python': 'python', 'cpp': 'cpp', 'c': 'c', 'java': 'java'},
 		\ 'template_ext': '.html'},
-		\ {'path': '/workspace/wiki/reading'}]
+		\ {'path': '/workspace/wiki/h1'},
+		\ {'path': '/workspace/wiki/android'},
+		\ {'path': '/workspace/wiki/reading'}
+		\ ]
 	
 	let g:vimwiki_valid_html_tags='pre,code'
 	let g:vimwiki_camel_case = 0
@@ -78,8 +80,8 @@ if MySys()=="win32"
 	    \ 'template_path': 'd:/wiki/.template/',
 	    \ 'template_default': 'united',
 	    \ 'index': 'index',
-	    \ 'ext': '.wiki',
-	    \ 'syntax': 'default',
+	    \ 'ext': '.md',
+	    \ 'syntax': 'markdown',
 	    \ 'auto_export': 1,
 	    \ 'nested_syntaxes': {'python': 'python', 'cpp': 'cpp', 'c': 'c', 'java': 'java'},
 	    \ 'template_ext': '.html'}]
