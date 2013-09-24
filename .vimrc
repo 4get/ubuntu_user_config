@@ -12,7 +12,7 @@ set showcmd
 "set nu
 set tw=0
 "set incsearch	
-"set fileformats=unix,dos
+set fileformats=unix,dos
 
 map <F2> :e ++ff=dos<CR>
 map <F3> :set mouse=a<CR>
@@ -20,7 +20,12 @@ map <F4> :set mouse=<CR>
 map <F5> :invnumber<CR>
 map <F7> :TlistToggle<CR>
 map <F8> [I
-map <F9> :VimwikiAll2HTML<CR>
+
+map <F9> :call Myword()<CR><C-W>w /<C-R>=expand("<cword>")<CR><CR>N
+nmap <F10> :call Mydict1()<CR> <C-W>w b
+nmap <F11> :call Mydict2()<CR> <C-W>w b
+"map <F11> <ESC>^i*<ESC>
+map <F12> dd :w<CR> :b2<CR><ESC>p<ESC>:w<CR><ESC>:b1<CR>
 
 " Detect the system
 function! MySys()
@@ -39,14 +44,60 @@ let Tlist_Show_One_File=1
 let Tlist_File_Fold_Auto_Close=1
 "let Tlist_WinWidth=50
 
+function! Myword()  
+  cd /0
+  let expl=system('grep -rin ' .
+        \  expand("<cword>") .
+        \  ' /0/txt/grep/' 
+        \  )
+  windo if  
+        \ expand("%")=="diCt-tmp" |  
+        \ q!|endif  
+  bel 30sp diCt-tmp  
+  setlocal buftype=nofile bufhidden=hide noswapfile  
+  s/^/\=expl/  
+  :0
+endfunction  
+
+function! Mydict1()  
+  let expl=system('sdcv -n -u Oxford ' . 
+        \  expand("<cword>"))  
+  windo if  
+        \ expand("%")=="diCt-tmp" |  
+        \ q!|endif  
+  bel 30sp diCt-tmp  
+  setlocal buftype=nofile bufhidden=hide noswapfile  
+  1s/^/\=expl/  
+  :set syntax=vhdl
+  1  
+endfunction  
+
+function! Mydict2()  
+  let expl=system('sdcv -n -u Longman ' .  
+        \  expand("<cword>"))  
+  windo if  
+        \ expand("%")=="diCt-tmp" |  
+        \ q!|endif  
+  bel 30sp diCt-tmp  
+  setlocal buftype=nofile bufhidden=hide noswapfile  
+  1s/^/\=expl/  
+  ":%s/\/\//\r/
+  :%s/\/\//\r/g
+  :set syntax=vhdl
+  1  
+endfunction  
+
+
 
 
 "	\ 'auto_export': 1,
 
 if MySys()=="unix"
-	colorscheme desert
+	"colorscheme ron
+	colorscheme darkblue
 	set fileencodings=utf-8,gb2312,gbk,gb18030
 	set termencoding=utf-8
+	"set fileformats=unix
 	set encoding=utf-8
 	
 	let g:vimwiki_list = [{'path': '/workspace/wiki/',
@@ -54,14 +105,11 @@ if MySys()=="unix"
 		\ 'template_path': '/workspace/wiki/.template/',
 		\ 'template_default': 'united',
 		\ 'index': 'index',
-		\ 'ext': '.md',
+		\ 'ext': '.txt',
 		\ 'syntax': 'markdown',
 		\ 'nested_syntaxes': {'python': 'python', 'cpp': 'cpp', 'c': 'c', 'java': 'java'},
 		\ 'template_ext': '.html'},
-		\ {'path': '/workspace/wiki/h1'},
-		\ {'path': '/workspace/wiki/android'},
-		\ {'path': '/workspace/wiki/reading'}
-		\ ]
+		\ {'path': '/workspace/wiki/reading'}]
 	
 	let g:vimwiki_valid_html_tags='pre,code'
 	let g:vimwiki_camel_case = 0
@@ -71,19 +119,24 @@ if MySys()=="unix"
 endif
 
 if MySys()=="win32"
+	cd d:\dropbox\reading
+	set fileformats=dos
 	colorscheme darkblue
 
 	let &termencoding=&encoding
-	set fileencodings=utf-8,gbk,ucs-bom,cp936
-	let g:vimwiki_list = [{'path': 'd:/wiki/',
+	set fileencodings=utf-8
+	let g:vimwiki_list = [{'path': 'd:/Dropbox/reading',
 	    \ 'path_html': 'd:/wiki_html/',
 	    \ 'template_path': 'd:/wiki/.template/',
 	    \ 'template_default': 'united',
 	    \ 'index': 'index',
-	    \ 'ext': '.md',
+	    \ 'ext': '.txt',
 	    \ 'syntax': 'markdown',
-	    \ 'auto_export': 1,
 	    \ 'nested_syntaxes': {'python': 'python', 'cpp': 'cpp', 'c': 'c', 'java': 'java'},
-	    \ 'template_ext': '.html'}]
+	    \ 'template_ext': '.html'},
+		\ {'path': 'd:/wiki/',
+	    \ 'index': 'index',
+	    \ 'ext': '.md'}]
+
 endif 
 
