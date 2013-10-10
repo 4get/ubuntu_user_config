@@ -19,13 +19,13 @@ map <F3> :set mouse=a<CR>
 map <F4> :set mouse=<CR>
 map <F5> :invnumber<CR>
 map <F7> :TlistToggle<CR>
-map <F8> [I
+"map <F8> [I
 
-map <F9> :call Myword()<CR><C-W>w /<C-R>=expand("<cword>")<CR><CR>N
+map <F8> dd :w<CR> :b2<CR><ESC>p<ESC>:w<CR><ESC>:b1<CR>
+nmap <F9> :call Mydict2()<CR> <C-W>w b
 nmap <F10> :call Mydict1()<CR> <C-W>w b
-nmap <F11> :call Mydict2()<CR> <C-W>w b
-"map <F11> <ESC>^i*<ESC>
-map <F12> dd :w<CR> :b2<CR><ESC>p<ESC>:w<CR><ESC>:b1<CR>
+map <F11> :call Myword()<CR><C-W>w /<C-R>=expand("<cword>")<CR><CR>N
+map <F12> <ESC>^i*<ESC>ww
 
 " Detect the system
 function! MySys()
@@ -44,11 +44,11 @@ let Tlist_Show_One_File=1
 let Tlist_File_Fold_Auto_Close=1
 "let Tlist_WinWidth=50
 
-function! Myword()  
+function! Myword()
   cd /0
   let expl=system('grep -rin ' .
         \  expand("<cword>") .
-        \  ' /0/txt/grep/' 
+        \  ' /0/txt/grep/*' 
         \  )
   windo if  
         \ expand("%")=="diCt-tmp" |  
