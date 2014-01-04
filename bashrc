@@ -26,12 +26,6 @@ alias gitlog2='git log --pretty=format:"%h %s" --graph'
 alias sl='screen -ls'
 alias sr='screen -D -R'
 
-#h1
-#export PATH=$PATH:/home/jinglun/h1/trident/compiler/bin
-#export PATH=$PATH:/home/jinglun/h1/trident/script
-#export PATH=$PATH:/home/jinglun/h1/trident/sdk/host/linux/bin/
-#export PKG_CONFIG_PATH=/home/jinglun/h1/trident/build/pkgconfig
-
 #eda_tools
 source /eda/common.sh
 

@@ -22,9 +22,10 @@ map <F7> :TlistToggle<CR>
 "map <F8> [I
 
 map <F8> dd :w<CR> :b2<CR><ESC>p<ESC>:w<CR><ESC>:b1<CR>
-nmap <F9> :call Mydict2()<CR> <C-W>w b
+map <F11> /<C-R>=expand("<cword>")<CR><CR>:b3<CR>n
+"nmap <F9> :call Mydict2()<CR> <C-W>w b
 nmap <F10> :call Mydict1()<CR> <C-W>w b
-map <F11> :call Myword()<CR><C-W>w /<C-R>=expand("<cword>")<CR><CR>N
+"map <F11> :call Myword()<CR><C-W>w /<C-R>=expand("<cword>")<CR><CR>N
 map <F12> <ESC>^i*<ESC>ww
 
 " Detect the system
@@ -45,10 +46,9 @@ let Tlist_File_Fold_Auto_Close=1
 "let Tlist_WinWidth=50
 
 function! Myword()
-  cd /0
-  let expl=system('grep -rin ' .
+  let expl=system('grep -rin -m 20 ' .
         \  expand("<cword>") .
-        \  ' /0/txt/grep/*' 
+        \  ' grep/*' 
         \  )
   windo if  
         \ expand("%")=="diCt-tmp" |  

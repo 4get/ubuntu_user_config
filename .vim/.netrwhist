@@ -1,2 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/workspace/trident/cowork_trident3_part/others/dvb/smc_demo3/.git'
+let g:netrw_dirhist_2='/workspace/trident/cowork_trident3_part/recovery/.git'
+let g:netrw_dirhist_3='/workspace/trident/u_disk_recovery/.git'
